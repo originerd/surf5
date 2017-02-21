@@ -1005,6 +1005,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.originerd.Surf5;
 				PRODUCT_NAME = Surf5;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1022,6 +1023,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.originerd.Surf5;
 				PRODUCT_NAME = Surf5;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

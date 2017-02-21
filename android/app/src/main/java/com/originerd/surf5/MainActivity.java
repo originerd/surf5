@@ -1,4 +1,4 @@
-package com.surf5;
+package com.originerd.surf5;
 
 import com.facebook.react.ReactActivity;
 

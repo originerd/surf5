@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.surf5"
+    package="com.originerd.surf5"
     android:versionCode="1"
     android:versionName="1.0">
 

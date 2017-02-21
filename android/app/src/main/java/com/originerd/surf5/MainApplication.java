@@ -1,4 +1,4 @@
-package com.surf5;
+package com.originerd.surf5;
 
 import android.app.Application;
 import android.util.Log;
