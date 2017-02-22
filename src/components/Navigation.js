@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react';
 import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+import Home from '../components/Home';
 import InitialScreen from '../containers/InitialScreen';
+import SessionsScreen from '../containers/SessionsScreen';
 import colors from '../lib/colors';
 import navigationHeader from '../lib/navigationHeader';
 
@@ -13,7 +15,9 @@ const propTypes = {
 
 const Navigator = (
   StackNavigator({
+    Home: { screen: Home },
     Initial: { screen: InitialScreen },
+    Sessions: { screen: SessionsScreen },
   }, {
     navigationOptions: {
       header: navigationHeader,
