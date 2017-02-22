@@ -6,6 +6,7 @@ import Home from '../components/Home';
 import InitialScreen from '../containers/InitialScreen';
 import LoginScreen from '../containers/LoginScreen';
 import NameScreen from '../containers/NameScreen';
+import RegisterScreen from '../containers/RegisterScreen';
 import SessionsScreen from '../containers/SessionsScreen';
 import colors from '../lib/colors';
 import navigationHeader from '../lib/navigationHeader';
@@ -21,6 +22,7 @@ const Navigator = (
     Initial: { screen: InitialScreen },
     Login: { screen: LoginScreen },
     Name: { screen: NameScreen },
+    Register: { screen: RegisterScreen },
     Sessions: { screen: SessionsScreen },
   }, {
     navigationOptions: {
