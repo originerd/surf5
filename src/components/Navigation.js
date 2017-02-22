@@ -5,6 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import Home from '../components/Home';
 import InitialScreen from '../containers/InitialScreen';
 import LoginScreen from '../containers/LoginScreen';
+import NameScreen from '../containers/NameScreen';
 import SessionsScreen from '../containers/SessionsScreen';
 import colors from '../lib/colors';
 import navigationHeader from '../lib/navigationHeader';
@@ -19,6 +20,7 @@ const Navigator = (
     Home: { screen: Home },
     Initial: { screen: InitialScreen },
     Login: { screen: LoginScreen },
+    Name: { screen: NameScreen },
     Sessions: { screen: SessionsScreen },
   }, {
     navigationOptions: {
