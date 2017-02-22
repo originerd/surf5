@@ -3,7 +3,7 @@ import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { NAVIGATION_GOBACK } from '../actions/actionTypes';
+import { navigationGoBack } from '../actions/navigation';
 import InitialScreen from '../components/InitialScreen';
 import colors from '../lib/colors';
 import navigationHeader from '../lib/navigationHeader';
@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  goBack: () => dispatch({ type: NAVIGATION_GOBACK }),
+  goBack: () => dispatch(navigationGoBack()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
