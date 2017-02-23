@@ -9,7 +9,7 @@ describe('navigation(state, action)', () => {
   describe('when state is not passed', () => {
     it('initializes with default state', () => {
       // When
-      const result = navigation(undefined, {});
+      const result = navigation();
 
       // Then
       expect(result).toEqual({
@@ -37,7 +37,7 @@ describe('navigation(state, action)', () => {
         };
 
         // When
-        const result = navigation(state, {});
+        const result = navigation(state);
 
         // Then
         expect(result).toEqual({

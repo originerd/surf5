@@ -28,7 +28,7 @@ const route = (state, action) => {
   }
 };
 
-const navigation = (state = defaultState, action) => {
+const navigation = (state = defaultState, action = {}) => {
   switch (action.type) {
     case NAVIGATION_GOBACK:
       return {
