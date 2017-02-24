@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { navigationGoBack } from '../actions/navigation';
+import { navigationGoBack, navigationResetToFirstScreen } from '../actions/navigation';
 import Navigation from '../components/Navigation';
 
 const mapStateToProps = state => ({
@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   goBack: () => dispatch(navigationGoBack()),
+  sessionManage: () => dispatch(navigationResetToFirstScreen()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
