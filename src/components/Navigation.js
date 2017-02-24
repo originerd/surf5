@@ -6,13 +6,13 @@ import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Home from '../components/Home';
-import LoginScreen from '../containers/LoginScreen';
 import NameScreen from '../containers/NameScreen';
 import RegisterScreen from '../containers/RegisterScreen';
 import SessionsScreen from '../containers/SessionsScreen';
 import colors from '../lib/colors';
 import navigationHeader from '../lib/navigationHeader';
 import InitialScreen from './InitialScreen';
+import LoginScreen from './LoginScreen';
 
 const propTypes = {
   goBack: PropTypes.func.isRequired,

@@ -1,7 +1,4 @@
-import React, {
-  Component,
-  PropTypes,
-} from 'react';
+import React, { Component } from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -16,10 +13,6 @@ import colors from '../lib/colors';
 import firebase from '../lib/firebase';
 import navigationHeader from '../lib/navigationHeader';
 import Button from './Button';
-
-const propTypes = {
-  resetToHome: PropTypes.func.isRequired,
-};
 
 const styles = StyleSheet.create({
   buttonContent: {
@@ -131,16 +124,14 @@ class Login extends Component {
   }
 
   async login() {
-    const { resetToHome } = this.props;
     const { email, password } = this.state;
 
     this.setIsLoading(true);
 
     try {
-      await firebase.auth()
+      await firebase
+        .auth()
         .signInWithEmailAndPassword(email, password);
-
-      resetToHome();
     } catch (error) {
       console.warn(error.message);
       this.setIsLoading(false);
@@ -237,7 +228,5 @@ Login.navigationOptions = {
     title: '로그인',
   },
 };
-
-Login.propTypes = propTypes;
 
 export default Login;
