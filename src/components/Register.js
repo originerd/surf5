@@ -19,7 +19,6 @@ import navigationHeader from '../lib/navigationHeader';
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  resetToHome: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -134,7 +133,6 @@ class Register extends Component {
   }
 
   async register() {
-    const { resetToHome } = this.props;
     const { email, password } = this.state;
 
     this.setIsLoading(true);
@@ -145,9 +143,7 @@ class Register extends Component {
 
       const currentUser = firebase.auth().currentUser;
 
-      await firebase.database().ref(`users/${currentUser.uid}`).set({ email, name: this.name });
-
-      resetToHome();
+      firebase.database().ref(`users/${currentUser.uid}`).set({ email, name: this.name });
     } catch (error) {
       console.warn(error.message);
       this.setIsLoading(false);
