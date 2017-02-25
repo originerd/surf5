@@ -8,8 +8,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  goBack: () => dispatch(navigationGoBack()),
-  sessionManage: () => dispatch(navigationResetToFirstScreen()),
+  goBack() {
+    dispatch(navigationGoBack());
+  },
+  sessionManage() {
+    dispatch(navigationResetToFirstScreen());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
