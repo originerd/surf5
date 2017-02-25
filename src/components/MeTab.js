@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyTab = () => (
+const MeTab = () => (
   <View style={styles.container}>
     <Text style={styles.title}>
       나
@@ -26,6 +26,6 @@ const MyTab = () => (
   </View>
 );
 
-MyTab.navigationOptions = navigationOptions;
+MeTab.navigationOptions = navigationOptions;
 
-export default MyTab;
+export default MeTab;
