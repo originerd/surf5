@@ -5,7 +5,7 @@ import React, {
 import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import Home from '../components/Home';
+import HomeScreen from '../containers/HomeScreen';
 import NameScreen from '../containers/NameScreen';
 import RegisterScreen from '../containers/RegisterScreen';
 import SessionsScreen from '../containers/SessionsScreen';
@@ -22,7 +22,7 @@ const propTypes = {
 
 const Navigator = (
   StackNavigator({
-    Home: { screen: Home },
+    Home: { screen: HomeScreen },
     Initial: { screen: InitialScreen },
     Login: { screen: LoginScreen },
     Name: { screen: NameScreen },

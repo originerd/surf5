@@ -1,34 +1,44 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, { PropTypes } from 'react';
+import { TabNavigator } from 'react-navigation';
 
-import navigationHeader from '../lib/navigationHeader';
+import colors from '../lib/colors';
+import MyTab from './MyTab';
+import SurfsTab from './SurfsTab';
+import TimelineTab from './TimelineTab';
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: 'whitesmoke',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
-
-const HomeScreen = () => (
-  <View style={styles.container}>
-    <Text style={styles.title}>
-      It is home screen.
-    </Text>
-  </View>
-);
-
-HomeScreen.navigationOptions = {
-  header: {
-    ...navigationHeader,
-    title: 'Surf5',
-  },
+const Tabs = {
+  Timeline: { screen: TimelineTab },
+  Surfs: { screen: SurfsTab },
+  My: { screen: MyTab },
 };
 
-export default HomeScreen;
+const Navigator = (
+  TabNavigator(
+    Tabs,
+    {
+      lazyLoad: true,
+      swipeEnabled: true,
+      tabBarOptions: {
+        activeTintColor: colors.nerd,
+      },
+    },
+  )
+);
+
+const propTypes = {
+  state: PropTypes.object.isRequired,
+};
+
+const Home = ({ state }) => (
+  <Navigator
+    navigation={{
+      navigate: () => {},
+      state,
+    }}
+  />
+);
+
+Home.propTypes = propTypes;
+
+export default Home;
+export { Tabs };
