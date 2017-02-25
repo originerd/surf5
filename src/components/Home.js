@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react';
 import { TabNavigator } from 'react-navigation';
 
 import colors from '../lib/colors';
-import MyTab from './MyTab';
+import MeTab from './MeTab';
 import SurfsTab from './SurfsTab';
 import TimelineTab from './TimelineTab';
 
 const Tabs = {
   Timeline: { screen: TimelineTab },
   Surfs: { screen: SurfsTab },
-  My: { screen: MyTab },
+  Me: { screen: MeTab },
 };
 
 const Navigator = (
@@ -20,6 +20,7 @@ const Navigator = (
       swipeEnabled: true,
       tabBarOptions: {
         activeTintColor: colors.nerd,
+        inactiveTintColor: 'gray',
       },
     },
   )

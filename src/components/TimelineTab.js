@@ -4,8 +4,18 @@ import {
   Text,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import colors from '../lib/colors';
 
 const navigationOptions = {
+  tabBar: {
+    icon(state) {
+      const color = state.focused ? colors.nerd : 'gray';
+
+      return <Icon name="newspaper-o" size={18} color={color} />;
+    },
+  },
   title: '새 소식',
 };
 
