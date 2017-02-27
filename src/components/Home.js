@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { TabNavigator } from 'react-navigation';
 
+import TimelineTab from '../containers/TimelineTab';
 import colors from '../lib/colors';
 import MeTab from './MeTab';
 import SurfsTab from './SurfsTab';
-import TimelineTab from './TimelineTab';
 
 const Tabs = {
   Timeline: { screen: TimelineTab },
