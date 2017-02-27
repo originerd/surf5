@@ -1,6 +1,7 @@
 import {
   timelineAppend,
   timelinePrepend,
+  timelineReset,
 } from '../../src/actions/timeline';
 import timeline from '../../src/reducers/timeline';
 
@@ -54,6 +55,20 @@ describe('timeline(state, action)', () => {
       // Then
       expect(result).toEqual({
         surfs: [...newSurfs, { surf: 'Hello' }],
+      });
+    });
+
+    describe('when action is timelineReset', () => {
+      // Given
+      const state = { surfs: [{ surf: 'Hello' }] };
+      const newSurfs = [{ surf: 'New surf1' }, { surf: 'New surf2' }];
+
+      // When
+      const result = timeline(state, timelineReset(...newSurfs));
+
+      // Then
+      expect(result).toEqual({
+        surfs: newSurfs,
       });
     });
   });

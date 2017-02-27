@@ -1,6 +1,7 @@
 import {
   TIMELINE_APPEND,
   TIMELINE_PREPEND,
+  TIMELINE_RESET,
 } from '../actions/actionTypes';
 
 const defaultState = {
@@ -16,6 +17,10 @@ const timeline = (state = defaultState, action = {}) => {
     case TIMELINE_PREPEND:
       return {
         surfs: [...action.surfs, ...state.surfs],
+      };
+    case TIMELINE_RESET:
+      return {
+        surfs: action.surfs,
       };
     default:
       return state;
