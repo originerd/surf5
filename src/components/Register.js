@@ -142,8 +142,10 @@ class Register extends Component {
         .createUserWithEmailAndPassword(email, password);
 
       const currentUser = firebase.auth().currentUser;
+      const name = this.name;
+      const timestamp = Date.now();
 
-      firebase.database().ref(`users/${currentUser.uid}`).set({ email, name: this.name });
+      firebase.database().ref(`users/${currentUser.uid}`).set({ email, name, timestamp });
     } catch (error) {
       console.warn(error.message);
       this.setIsLoading(false);
