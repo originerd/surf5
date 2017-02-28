@@ -3,6 +3,7 @@ import React, {
   PropTypes,
 } from 'react';
 import {
+  ActivityIndicator,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,6 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import colors from '../lib/colors';
+import firebase from '../lib/firebase';
 import Surf from './Surf';
 
 const navigationOptions = {
@@ -26,7 +28,9 @@ const navigationOptions = {
 
 const propTypes = {
   timeline: PropTypes.object.isRequired,
+  timelinePrepend: PropTypes.func.isRequired,
   users: PropTypes.object.isRequired,
+  usersLoad: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -34,37 +38,87 @@ const styles = StyleSheet.create({
     backgroundColor: 'whitesmoke',
     flex: 1,
   },
-  emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   emptyText: {
     color: 'darkgray',
     textAlign: 'center',
   },
+  nonIdealState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 class Timeline extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: false,
+    };
+
+    this.loadTimeline = this.loadTimeline.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadTimeline();
+  }
+
+  loadTimeline() {
+    const { timelinePrepend } = this.props;
+    const uid = firebase.auth().currentUser.uid;
+    const timelineRef = firebase.database().ref(`timeline/${uid}`).orderByChild('timestamp').limitToLast(25);
+
+    this.setState({ isLoading: true });
+
+    timelineRef.on('child_added', (snapshot) => {
+      const surf = Object.assign({}, snapshot.val(), { sid: snapshot.key });
+
+      if (this.state.isLoading) {
+        this.setState({ isLoading: false });
+      }
+
+      timelinePrepend(surf);
+    });
+  }
+
   renderSurfs() {
-    const { timeline, users } = this.props;
+    const { timeline, users, usersLoad } = this.props;
 
     return (
-      timeline.surfs.map(surf => (
-        <Surf
-          key={surf.sid}
-          name={users[surf.uid].name}
-          {...surf}
-        />
-      ))
+      timeline.surfs.map((surf) => {
+        const name = users[surf.uid] && users[surf.uid].name;
+
+        if (!name) {
+          usersLoad(surf.uid);
+
+          return null;
+        }
+
+        return (
+          <Surf
+            key={surf.sid}
+            name={name}
+            {...surf}
+          />
+        );
+      })
     );
   }
 
   render() {
     const { timeline } = this.props;
 
+    if (this.state.isLoading) {
+      return (
+        <View style={[styles.container, styles.nonIdealState]}>
+          <ActivityIndicator color={colors.nerd} />
+        </View>
+      );
+    }
+
     if (timeline.surfs.length === 0) {
       return (
-        <View style={[styles.container, styles.emptyContainer]}>
+        <View style={[styles.container, styles.nonIdealState]}>
           <Text style={styles.emptyText}>
             타임라인에 글이 없네요.
             {'\n'}
