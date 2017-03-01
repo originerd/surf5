@@ -51,7 +51,7 @@ describe('users(state, action)', () => {
         const result = users(state, usersAdd(newUser));
 
         // Then
-        expect(result).toEqual(Object.assign({}, state, newUser));
+        expect(result).toEqual({ ...state, ...newUser });
       });
     });
   });

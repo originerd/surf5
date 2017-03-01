@@ -22,7 +22,7 @@ const timeline = (state = defaultState, action = {}) => {
       return {
         surfs: [
           ...state.surfs.slice(0, index),
-          Object.assign({}, state.surfs[index], { likeCount: action.likeCount }),
+          { ...state.surfs[index], likeCount: action.likeCount },
           ...state.surfs.slice(index + 1),
         ],
       };
@@ -33,7 +33,7 @@ const timeline = (state = defaultState, action = {}) => {
       return {
         surfs: [
           ...state.surfs.slice(0, index),
-          Object.assign({}, state.surfs[index], { likes: action.likes }),
+          { ...state.surfs[index], likes: action.likes },
           ...state.surfs.slice(index + 1),
         ],
       };
