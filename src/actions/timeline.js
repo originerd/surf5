@@ -11,6 +11,16 @@ export const timelineAppend = (...surfs) => ({
   type: TIMELINE_APPEND,
 });
 
+export const timelinePrepend = (...surfs) => ({
+  surfs,
+  type: TIMELINE_PREPEND,
+});
+
+export const timelineReset = (...surfs) => ({
+  surfs,
+  type: TIMELINE_RESET,
+});
+
 export const timelineSetLikeCount = (sid, likeCount) => ({
   likeCount,
   sid,
@@ -21,14 +31,4 @@ export const timelineSetLikes = (sid, likes) => ({
   likes,
   sid,
   type: TIMELINE_SET_LIKES,
-});
-
-export const timelinePrepend = (...surfs) => ({
-  surfs,
-  type: TIMELINE_PREPEND,
-});
-
-export const timelineReset = (...surfs) => ({
-  surfs,
-  type: TIMELINE_RESET,
 });

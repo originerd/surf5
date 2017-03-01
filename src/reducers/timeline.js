@@ -10,6 +10,10 @@ const timeline = (state = [], action = {}) => {
   switch (action.type) {
     case TIMELINE_APPEND:
       return [...state, ...action.surfs];
+    case TIMELINE_PREPEND:
+      return [...action.surfs, ...state];
+    case TIMELINE_RESET:
+      return action.surfs;
     case TIMELINE_SET_LIKE_COUNT: {
       const index = state.findIndex(surf => surf.sid === action.sid);
 
@@ -28,10 +32,6 @@ const timeline = (state = [], action = {}) => {
         ...state.slice(index + 1),
       ];
     }
-    case TIMELINE_PREPEND:
-      return [...action.surfs, ...state];
-    case TIMELINE_RESET:
-      return action.surfs;
     default:
       return state;
   }
