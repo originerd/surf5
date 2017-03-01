@@ -9,6 +9,7 @@ import HomeScreen from '../containers/HomeScreen';
 import NameScreen from '../containers/NameScreen';
 import RegisterScreen from '../containers/RegisterScreen';
 import SessionsScreen from '../containers/SessionsScreen';
+import WriteScreen from '../containers/WriteScreen';
 import colors from '../lib/colors';
 import navigationHeader from '../lib/navigationHeader';
 import InitialScreen from './InitialScreen';
@@ -28,6 +29,7 @@ const Navigator = (
     Name: { screen: NameScreen },
     Register: { screen: RegisterScreen },
     Sessions: { screen: SessionsScreen },
+    Write: { screen: WriteScreen },
   }, {
     navigationOptions: {
       header: navigationHeader,
