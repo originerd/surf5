@@ -14,7 +14,7 @@ describe('timeline(state, action)', () => {
       const result = timeline();
 
       // Then
-      expect(result).toEqual({ surfs: [] });
+      expect(result).toEqual([]);
     });
   });
 
@@ -22,7 +22,7 @@ describe('timeline(state, action)', () => {
     describe('when action type is invalid', () => {
       it('returns state', () => {
         // Given
-        const state = { surfs: [{ surf: 'Hello' }] };
+        const state = [{ surf: 'Hello' }];
 
         // When
         const result = timeline(state);
@@ -34,70 +34,60 @@ describe('timeline(state, action)', () => {
 
     describe('when action is timelineAppend', () => {
       // Given
-      const state = { surfs: [{ surf: 'Hello' }] };
+      const state = [{ surf: 'Hello' }];
       const newSurfs = [{ surf: 'New surf1' }, { surf: 'New surf2' }];
 
       // When
       const result = timeline(state, timelineAppend(...newSurfs));
 
       // Then
-      expect(result).toEqual({
-        surfs: [{ surf: 'Hello' }, ...newSurfs],
-      });
+      expect(result).toEqual([{ surf: 'Hello' }, ...newSurfs]);
     });
 
     describe('when action is timelineSetLikeCount', () => {
       // Given
-      const state = { surfs: [{ sid: '1' }, { sid: '2' }] };
+      const state = [{ sid: '1' }, { sid: '2' }];
 
       // When
       const result = timeline(state, timelineSetLikeCount('2', 2));
 
       // Then
-      expect(result).toEqual({
-        surfs: [{ sid: '1' }, { likeCount: 2, sid: '2' }],
-      });
+      expect(result).toEqual([{ sid: '1' }, { likeCount: 2, sid: '2' }]);
     });
 
     describe('when action is timelineSetLikes', () => {
       // Given
-      const state = { surfs: [{ sid: '1' }, { sid: '2' }] };
+      const state = [{ sid: '1' }, { sid: '2' }];
 
       // When
       const result = timeline(state, timelineSetLikes('2', { uid: true }));
 
       // Then
-      expect(result).toEqual({
-        surfs: [{ sid: '1' }, { likes: { uid: true }, sid: '2' }],
-      });
+      expect(result).toEqual([{ sid: '1' }, { likes: { uid: true }, sid: '2' }]);
     });
 
     describe('when action is timelinePrepend', () => {
       // Given
-      const state = { surfs: [{ surf: 'Hello' }] };
+      const state = [{ surf: 'Hello' }];
       const newSurfs = [{ surf: 'New surf1' }, { surf: 'New surf2' }];
 
       // When
       const result = timeline(state, timelinePrepend(...newSurfs));
 
       // Then
-      expect(result).toEqual({
-        surfs: [...newSurfs, { surf: 'Hello' }],
-      });
+      expect(result).toEqual([...newSurfs, { surf: 'Hello' }]);
     });
 
     describe('when action is timelineReset', () => {
       // Given
-      const state = { surfs: [{ surf: 'Hello' }] };
+      const state = [{ surf: 'Hello' }];
       const newSurfs = [{ surf: 'New surf1' }, { surf: 'New surf2' }];
 
       // When
       const result = timeline(state, timelineReset(...newSurfs));
 
       // Then
-      expect(result).toEqual({
-        surfs: newSurfs,
-      });
+      expect(result).toEqual(newSurfs);
     });
   });
 });

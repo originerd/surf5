@@ -6,46 +6,32 @@ import {
   TIMELINE_RESET,
 } from '../actions/actionTypes';
 
-const defaultState = {
-  surfs: [],
-};
-
-const timeline = (state = defaultState, action = {}) => {
+const timeline = (state = [], action = {}) => {
   switch (action.type) {
     case TIMELINE_APPEND:
-      return {
-        surfs: [...state.surfs, ...action.surfs],
-      };
+      return [...state, ...action.surfs];
     case TIMELINE_SET_LIKE_COUNT: {
-      const index = state.surfs.findIndex(surf => surf.sid === action.sid);
+      const index = state.findIndex(surf => surf.sid === action.sid);
 
-      return {
-        surfs: [
-          ...state.surfs.slice(0, index),
-          { ...state.surfs[index], likeCount: action.likeCount },
-          ...state.surfs.slice(index + 1),
-        ],
-      };
+      return [
+        ...state.slice(0, index),
+        { ...state[index], likeCount: action.likeCount },
+        ...state.slice(index + 1),
+      ];
     }
     case TIMELINE_SET_LIKES: {
-      const index = state.surfs.findIndex(surf => surf.sid === action.sid);
+      const index = state.findIndex(surf => surf.sid === action.sid);
 
-      return {
-        surfs: [
-          ...state.surfs.slice(0, index),
-          { ...state.surfs[index], likes: action.likes },
-          ...state.surfs.slice(index + 1),
-        ],
-      };
+      return [
+        ...state.slice(0, index),
+        { ...state[index], likes: action.likes },
+        ...state.slice(index + 1),
+      ];
     }
     case TIMELINE_PREPEND:
-      return {
-        surfs: [...action.surfs, ...state.surfs],
-      };
+      return [...action.surfs, ...state];
     case TIMELINE_RESET:
-      return {
-        surfs: action.surfs,
-      };
+      return action.surfs;
     default:
       return state;
   }

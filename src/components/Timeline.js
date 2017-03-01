@@ -27,7 +27,7 @@ const navigationOptions = {
 };
 
 const propTypes = {
-  timeline: PropTypes.object.isRequired,
+  timeline: PropTypes.array.isRequired,
   timelineSetLikeCount: PropTypes.func.isRequired,
   timelineSetLikes: PropTypes.func.isRequired,
   timelinePrepend: PropTypes.func.isRequired,
@@ -68,12 +68,12 @@ class Timeline extends Component {
   loadTimeline() {
     const { timelinePrepend } = this.props;
     const uid = firebase.auth().currentUser.uid;
-    const timelineRef = firebase.database().ref(`timeline/${uid}`).orderByChild('timestamp').limitToLast(25);
+    const timelineRef = firebase.database().ref(`timeline/${uid}`).orderByChild('timestamp').limitToLast(40);
 
     this.setState({ isLoading: true });
 
     timelineRef.on('child_added', (snapshot) => {
-      const surf = Object.assign({}, snapshot.val(), { sid: snapshot.key });
+      const surf = { ...snapshot.val(), sid: snapshot.key };
 
       if (this.state.isLoading) {
         this.setState({ isLoading: false });
@@ -87,7 +87,7 @@ class Timeline extends Component {
     const { timeline, timelineSetLikeCount, timelineSetLikes, users, usersLoad } = this.props;
 
     return (
-      timeline.surfs.map((surf) => {
+      timeline.map((surf) => {
         const name = users[surf.uid] && users[surf.uid].name;
 
         if (!name) {
@@ -120,7 +120,7 @@ class Timeline extends Component {
       );
     }
 
-    if (timeline.surfs.length === 0) {
+    if (timeline.length === 0) {
       return (
         <View style={[styles.container, styles.nonIdealState]}>
           <Text style={styles.emptyText}>
