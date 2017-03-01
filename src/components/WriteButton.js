@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../lib/colors';
 
 const propTypes = {
+  followers: PropTypes.object.isRequired,
   navigateToWrite: PropTypes.func.isRequired,
 };
 
@@ -25,11 +26,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const WriteButton = ({ navigateToWrite }) => (
-  <TouchableOpacity onPress={navigateToWrite} style={styles.container}>
-    <Icon color="whitesmoke" name="pencil" size={20} />
-  </TouchableOpacity>
-);
+const WriteButton = ({ followers, navigateToWrite }) => {
+  if (Object.keys(followers).length === 0) {
+    return null;
+  }
+
+  return (
+    <TouchableOpacity onPress={navigateToWrite} style={styles.container}>
+      <Icon color="whitesmoke" name="pencil" size={20} />
+    </TouchableOpacity>
+  );
+};
 
 WriteButton.propTypes = propTypes;
 
