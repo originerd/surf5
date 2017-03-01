@@ -5,11 +5,21 @@ import {
   Text,
   View,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import colors from '../lib/colors';
+
+const defaultProps = {
+  likes: {},
+};
 
 const propTypes = {
+  likeCount: PropTypes.number.isRequired,
+  likes: PropTypes.object,
   name: PropTypes.string.isRequired,
   surf: PropTypes.string.isRequired,
   timestamp: PropTypes.number.isRequired,
+  uid: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -18,6 +28,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: 'darkgray',
     padding: 10,
+  },
+  footerContainer: {
+    flexDirection: 'row',
   },
   infoContainer: {
     alignItems: 'flex-end',
@@ -29,26 +42,41 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginBottom: 5,
   },
+  smallText: {
+    color: 'gray',
+    fontSize: 11,
+    marginHorizontal: 2,
+    textAlign: 'right',
+  },
   surf: {
     color: 'darkslategray',
     fontSize: 20,
     marginBottom: 5,
   },
-  timestamp: {
-    color: 'gray',
-    fontSize: 11,
-    textAlign: 'right',
-  },
 });
 
-const Surf = ({ name, surf, timestamp }) => (
-  <View style={styles.container}>
-    <Text style={styles.name}>{name}</Text>
-    <Text style={styles.surf}>{surf.split('').join('\t')}</Text>
-    <Text style={styles.timestamp}>{moment(timestamp).format('YYYY-MM-DD hh:mm A')}</Text>
-  </View>
-);
+const Surf = ({ likeCount, likes, name, surf, timestamp, uid }) => {
+  const iconName = `thumbs${likes[uid] ? '' : '-o'}-up`;
 
+  return (
+    <View style={styles.container}>
+      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.surf}>{surf.split('').join('\t')}</Text>
+      <View style={styles.footerContainer}>
+        <Text style={styles.smallText}>
+          {moment(timestamp).format('YYYY-MM-DD hh:mm A')}
+        </Text>
+        <Text style={styles.smallText}>
+          <Icon name={iconName} color={colors.nerd} />
+          {' '}
+          {likeCount}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+Surf.defaultProps = defaultProps;
 Surf.propTypes = propTypes;
 
 export default Surf;
