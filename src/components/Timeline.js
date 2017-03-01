@@ -28,6 +28,8 @@ const navigationOptions = {
 
 const propTypes = {
   timeline: PropTypes.object.isRequired,
+  timelineSetLikeCount: PropTypes.func.isRequired,
+  timelineSetLikes: PropTypes.func.isRequired,
   timelinePrepend: PropTypes.func.isRequired,
   users: PropTypes.object.isRequired,
   usersLoad: PropTypes.func.isRequired,
@@ -82,7 +84,7 @@ class Timeline extends Component {
   }
 
   renderSurfs() {
-    const { timeline, users, usersLoad } = this.props;
+    const { timeline, timelineSetLikeCount, timelineSetLikes, users, usersLoad } = this.props;
 
     return (
       timeline.surfs.map((surf) => {
@@ -98,6 +100,8 @@ class Timeline extends Component {
           <Surf
             key={surf.sid}
             name={name}
+            setLikeCount={timelineSetLikeCount}
+            setLikes={timelineSetLikes}
             {...surf}
           />
         );
