@@ -1,4 +1,7 @@
-import React, { PropTypes } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,13 +10,16 @@ import { TabNavigator } from 'react-navigation';
 
 import TimelineTab from '../containers/TimelineTab';
 import colors from '../lib/colors';
+import firebase from '../lib/firebase';
 import MeTab from './MeTab';
 import SurfsTab from './SurfsTab';
 import WriteButton from './WriteButton';
 
 const propTypes = {
+  followers: PropTypes.object.isRequired,
+  followersSet: PropTypes.func.isRequired,
   navigateToWrite: PropTypes.func.isRequired,
-  state: PropTypes.object.isRequired,
+  tab: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -42,17 +48,39 @@ const Navigator = (
   )
 );
 
-const Home = ({ navigateToWrite, state }) => (
-  <View style={styles.container}>
-    <Navigator
-      navigation={{
-        navigate: () => {},
-        state,
-      }}
-    />
-    <WriteButton navigateToWrite={navigateToWrite} />
-  </View>
-);
+class Home extends Component {
+  componentDidMount() {
+    this.loadFollowers();
+  }
+
+  loadFollowers() {
+    const { followersSet } = this.props;
+    const uid = firebase.auth().currentUser.uid;
+
+    firebase.database().ref(`followers/${uid}`).on('value', (snapshot) => {
+      const followers = { ...snapshot.val() };
+      followers[uid] = true;
+
+      followersSet(followers);
+    });
+  }
+
+  render() {
+    const { followers, navigateToWrite, tab } = this.props;
+
+    return (
+      <View style={styles.container}>
+        <Navigator
+          navigation={{
+            navigate: () => {},
+            state: tab,
+          }}
+        />
+        <WriteButton followers={followers} navigateToWrite={navigateToWrite} />
+      </View>
+    );
+  }
+}
 
 Home.propTypes = propTypes;
 

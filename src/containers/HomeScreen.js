@@ -1,13 +1,18 @@
 import { connect } from 'react-redux';
 
-import Home from '../components/Home';
+import { followersSet } from '../actions/followers';
 import { navigationNavigate } from '../actions/navigation';
+import Home from '../components/Home';
 
 const mapStateToProps = state => ({
-  state: state.tab,
+  followers: state.followers,
+  tab: state.tab,
 });
 
 const mapDispatchToProps = dispatch => ({
+  followersSet(followers) {
+    dispatch(followersSet(followers));
+  },
   navigateToWrite() {
     dispatch(navigationNavigate('Write'));
   },
