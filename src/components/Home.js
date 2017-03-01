@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 
+import MeTab from '../containers/MeTab';
 import SurfsTab from '../containers/SurfsTab';
 import TimelineTab from '../containers/TimelineTab';
 import colors from '../lib/colors';
 import firebase from '../lib/firebase';
-import MeTab from './MeTab';
 import WriteButton from './WriteButton';
 
 const propTypes = {
