@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   name: {
-    color: 'black',
+    color: 'dimgray',
     fontSize: 15,
     marginBottom: 5,
   },
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   surf: {
-    color: 'darkslategray',
+    color: 'slategray',
     fontSize: 20,
     marginBottom: 5,
   },
@@ -129,7 +129,7 @@ class Surf extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.surf}>{surf.split('').join('\t')}</Text>
+        <Text style={styles.surf}>{surf}</Text>
         <View style={styles.footerContainer}>
           <Text style={styles.smallText}>
             {moment(timestamp).format('YYYY-MM-DD hh:mm A')}
